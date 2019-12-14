@@ -1,0 +1,52 @@
+<%= form_with(model: @order, local: true) do |form| %>
+<% if @order.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+  <ul>
+    <% order.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form.file_field :archive %>
+<div class="actions">
+  <%= form.submit %>
+</div>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Descrição</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Endereço</th>
+      <th>Fornecedor</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.client %></td>
+      <td><%= order.description %></td>
+      <td><%= order.price %></td>
+      <td><%= order.quantity %></td>
+      <td><%= order.address %></td>
+      <td><%= order.provider %></td>
+      <td><%= link_to 'Show', order %></td>
+      <td><%= link_to 'Edit', edit_order_path(order) %></td>
+      <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
